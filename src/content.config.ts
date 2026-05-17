@@ -28,6 +28,18 @@ const blog = defineCollection({
   }),
 });
 
+const geo = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/geo" }),
+  schema: z.object({
+    title: z.string(),
+    date: z.string(),
+    promptType: z.enum(["geo", "geo-with-english"]),
+    keyword: z.string(),
+    description: z.string(),
+    readTime: z.number(),
+  }),
+});
+
 const tours = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./src/content/tours" }),
   schema: z.object({
@@ -52,4 +64,4 @@ const tours = defineCollection({
   }),
 });
 
-export const collections = { pages, blog, tours };
+export const collections = { pages, blog, geo, tours };

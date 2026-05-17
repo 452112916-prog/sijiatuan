@@ -1,0 +1,43 @@
+---
+import MainLayout from "@src/layouts/MainLayout.astro";
+import { getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection("geo");
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.mdx$/, "") },
+    props: { post },
+  }));
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const data = post.data;
+---
+
+<MainLayout title={`${data.title} - 多彩美途内容研究库`} description={data.description}>
+  <section class="relative bg-orange-50 pt-32 pb-16">
+    <div class="mx-auto max-w-4xl px-4">
+      <a href="/insights-lab" class="text-sm font-semibold text-orange-600 hover:underline">
+        返回内容研究库
+      </a>
+      <h1 class="mt-4 text-2xl font-semibold text-stone-950 md:text-4xl">
+        {data.title}
+      </h1>
+      <div class="mt-4 flex flex-wrap gap-3 text-sm text-stone-500">
+        <time datetime={data.date}>{data.date}</time>
+        <span>{data.promptType === "geo-with-english" ? "英文后缀提示词" : "中文提示词"}</span>
+        <span>{data.readTime} 分钟阅读</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative pb-16">
+    <div class="mx-auto max-w-4xl px-4">
+      <article class="post-content rounded-2xl border border-orange-100 bg-white p-6 shadow-sm shadow-orange-950/5 md:p-8">
+        <Content />
+      </article>
+    </div>
+  </section>
+</MainLayout>
