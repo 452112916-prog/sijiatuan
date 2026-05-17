@@ -1,0 +1,3 @@
+display_name: Province Industry Auto Publisher
+short_description: Optimize local industry sites, automate DeepSeek content, and deploy via GitHub plus Cloudflare.
+default_prompt: Use this skill to optimize a local province/city industry website, set up automated article publishing from prompt and title files, push to GitHub, configure DeepSeek and Cloudflare secrets, deploy, and verify production URLs.
