@@ -1,0 +1,17 @@
+---
+import BookingForm from "@src/components/BookingForm.astro";
+import HeadingSection from "@src/components/HeadingSection.astro";
+import MainLayout from "@src/layouts/MainLayout.astro";
+---
+
+<MainLayout
+  title="预订咨询 - 贵州多彩美途旅行社"
+  description="提交贵州私家团定制需求，贵州多彩美途旅行社会根据人数、天数、预算和抵离时间提供地接方案。"
+>
+  <HeadingSection
+    title="定制你的贵州私家团"
+    description="把人数、天数、抵达城市、想去的景点和住宿偏好告诉我们，我们来帮你把贵州行程排顺。"
+    backgroundImage="/img/optimized/bg-hero.webp"
+  />
+  <BookingForm />
+</MainLayout>

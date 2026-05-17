@@ -1,0 +1,81 @@
+---
+import WhyCard from "@src/components/WhyCard.astro";
+
+export interface WhyItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface WhyAboutSectionProps {
+  id?: string;
+  title: string;
+  backgroundImage: string;
+  items: WhyItem[];
+}
+
+const {
+  id = "why-about",
+  title = "为什么贵州旅行需要本地地接？",
+  backgroundImage = "/img/optimized/bg-hero.webp",
+  items = [
+    {
+      icon: "bi:signpost-split",
+      title: "路线更顺",
+      description: "根据抵离城市、景区距离和车程重新规划，减少来回折腾。",
+    },
+    {
+      icon: "bi:shield-check",
+      title: "服务透明",
+      description: "报价、用车、住宿和包含项目提前说明，沟通更清楚。",
+    },
+    {
+      icon: "bi:cup-hot",
+      title: "体验更地道",
+      description: "不仅看景点，也能安排贵州餐食、村寨体验和本地生活。",
+    },
+    {
+      icon: "bi:people",
+      title: "只服务你们",
+      description: "私家小团不用拼陌生人，时间和节奏更自由。",
+    },
+    {
+      icon: "bi:sliders",
+      title: "随时调整",
+      description: "遇到天气、人流或体力变化，可以及时调整当天安排。",
+    },
+    {
+      icon: "bi:headset",
+      title: "本地支持",
+      description: "从咨询到落地接待，都有熟悉贵州的团队跟进。",
+    },
+  ],
+} = Astro.props as WhyAboutSectionProps;
+---
+
+<section
+  id={id}
+  class="relative py-16 md:py-20 overflow-hidden mb-6"
+  style={`background-image: url('${backgroundImage}');
+         background-size: cover;
+         background-position: center;
+         background-attachment: fixed;`}
+>
+  <div class="absolute inset-0 bg-linear-to-b from-white/85 via-orange-50/75 to-white/90"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-semibold text-stone-950 mb-10">
+      {title}
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {items.map((item) => (
+        <WhyCard
+          icon={item.icon}
+          title={item.title}
+          description={item.description}
+        />
+      ))}
+    </div>
+  </div>
+</section>

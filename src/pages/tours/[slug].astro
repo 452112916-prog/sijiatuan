@@ -1,0 +1,138 @@
+---
+import MainLayout from "@src/layouts/MainLayout.astro";
+import { Icon } from "astro-icon/components";
+import { getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import TourGallery from "@src/components/TourGallery.astro";
+import ShareLink from "@src/components/ShareLink.astro";
+
+export const getStaticPaths = (async () => {
+  const tours = await getCollection("tours");
+
+  return tours.map((tour) => ({
+    params: { slug: tour.id.replace(/\.mdx$/, "") },
+    props: { tour },
+  }));
+}) satisfies GetStaticPaths;
+
+const { tour } = Astro.props;
+const { Content } = await render(tour);
+const data = tour.data;
+const rating = data.rating ?? 5;
+const reviews = data.reviews ?? 0;
+---
+
+<MainLayout title={`${data.title} - 贵州多彩美途旅行社`}>
+  <section>
+    <div class="relative pt-32 pb-20">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          <TourGallery
+            title={data.title}
+            cover={data.cover}
+            duration={data.duration}
+            gallery={data.gallery}
+          />
+
+          <div>
+            <h1 class="text-3xl md:text-4xl font-semibold text-stone-950">
+              {data.title}
+            </h1>
+
+            <p class="mt-4 mb-4 text-stone-600 leading-relaxed">
+              {data.description}
+            </p>
+
+            <div class="mb-6 flex items-center gap-2 text-stone-700">
+              <div class="flex items-center gap-1 text-yellow-500">
+                {Array.from({ length: Math.floor(rating) }).map(() => (
+                  <Icon name="bi:star-fill" />
+                ))}
+                {rating % 1 >= 0.5 && <Icon name="bi:star-half" />}
+              </div>
+
+              {reviews > 0 && (
+                <span>({rating}) {reviews}+ 条评价</span>
+              )}
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {data.pricing.map((pkg, index) => (
+                <div>
+                  <input
+                    type="radio"
+                    name="package"
+                    id={`pkg-${index}`}
+                    class="peer hidden"
+                    checked={index === 0}
+                  />
+                  <label
+                    for={`pkg-${index}`}
+                    class="flex items-center justify-between rounded-xl bg-white border border-orange-100 peer-checked:border-orange-500 peer-checked:bg-orange-50 px-4 py-3 cursor-pointer transition"
+                  >
+                    <span class="text-stone-900">{pkg.label}</span>
+                    <span class="text-stone-500 text-sm">¥{pkg.price}起</span>
+                  </label>
+                </div>
+              ))}
+            </div>
+
+            {data.facilities?.length && (
+              <div class="mt-8">
+                <h3 class="text-lg font-semibold text-stone-950 mb-3">
+                  服务包含
+                </h3>
+                <ul class="grid grid-cols-2 gap-3 text-stone-600">
+                  {data.facilities.map((item) => (
+                    <li class="flex items-center gap-2">
+                      <Icon name="bi:check-circle" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div class="mt-6 flex items-center gap-2 text-stone-700">
+              <Icon name="bi:geo-alt" />
+              <span>{data.location}</span>
+            </div>
+
+            <div class="mt-8">
+              <a
+                href="/booking"
+                class="w-full flex items-center justify-center gap-3 rounded-xl bg-orange-500 px-6 py-3 font-semibold text-white hover:bg-orange-600 transition"
+              >
+                <Icon name="bi:send" />
+                咨询这条路线
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="max-w-6xl mx-auto px-4">
+        <article class="post-content rounded-2xl bg-white border border-orange-100 p-6 md:p-8 shadow-sm shadow-orange-950/5">
+          <Content />
+          <span class="inline-block rounded-full bg-white/80 px-4 py-1 mt-4 text-xs text-black">
+            {data.category}
+          </span>
+        </article>
+      </div>
+    </div>
+
+    <div class="relative py-6">
+      <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <span class="text-stone-500">分享这条路线：</span>
+
+        <ShareLink
+          slug={tour.id.replace(/\.mdx$/, "")}
+          title={data.title}
+          path="tours"
+        />
+      </div>
+    </div>
+  </section>
+</MainLayout>

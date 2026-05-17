@@ -1,0 +1,59 @@
+---
+import { Icon } from "astro-icon/components";
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { data } = post;
+const slug = post.id.replace(/\.mdx$/, "");
+const postDate = typeof data.date === "string" ? new Date(data.date) : data.date;
+const formattedDate = new Intl.DateTimeFormat("zh-CN", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+}).format(postDate);
+const cover = data.cover ?? "/img/optimized/blog1.webp";
+const description = data.description ?? "";
+---
+
+<article class="group rounded-2xl border border-orange-100 bg-white shadow-sm shadow-orange-950/5 overflow-hidden">
+  <div class="relative aspect-video overflow-hidden">
+    <a href={`/blogs/${slug}`}>
+      <img
+        src={cover}
+        alt={data.title}
+        loading="lazy"
+        class="w-full h-full object-cover transition duration-500 group-hover:scale-110"
+      />
+
+      {data.category && (
+        <span class="absolute top-3 left-3 rounded-full bg-orange-500/90 px-3 py-1 text-xs text-white backdrop-blur">
+          {data.category}
+        </span>
+      )}
+    </a>
+  </div>
+
+  <div class="p-6">
+    <h3 class="text-lg font-semibold text-stone-950 hover:text-orange-600 transition">
+      <a href={`/blogs/${slug}`}>{data.title}</a>
+    </h3>
+
+    {description && <p class="mt-2 text-sm text-stone-600">{description}</p>}
+
+    <div class="mt-4 flex items-center justify-between text-sm text-stone-500">
+      <time datetime={postDate.toISOString()}>{formattedDate}</time>
+
+      <a
+        href={`/blogs/${slug}`}
+        class="inline-flex items-center gap-2 text-orange-600 font-medium hover:underline"
+      >
+        阅读更多
+        <Icon name="bi:arrow-right" class="w-4 h-4" />
+      </a>
+    </div>
+  </div>
+</article>

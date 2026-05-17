@@ -1,0 +1,44 @@
+---
+import TourCard from "@src/components/TourCard.astro";
+import { getCollection } from "astro:content";
+
+export interface TourSectionProps {
+  id?: string;
+  title: string;
+  description?: string;
+  maxTours?: number;
+}
+
+const {
+  id = "packages",
+  title = "贵州热门私家团路线",
+  description = "精选适合外地游客第一次来贵州和深度游贵州的地接路线。",
+  maxTours = 8,
+} = Astro.props as TourSectionProps;
+
+const allTours = await getCollection("tours");
+const tours = allTours.sort((a, b) => {
+  const priceA = Math.min(...a.data.pricing.map((p) => p.price));
+  const priceB = Math.min(...b.data.pricing.map((p) => p.price));
+  return priceA - priceB;
+});
+const visibleTours = tours.slice(0, maxTours);
+---
+
+<section id={id} class="relative py-16 md:py-20 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="mb-12 text-center">
+      <h2 class="text-3xl md:text-4xl font-semibold text-stone-950">{title}</h2>
+
+      {description && (
+        <p class="mt-3 text-stone-600 max-w-2xl mx-auto">{description}</p>
+      )}
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {visibleTours.map((tour) => (
+        <TourCard tour={tour} />
+      ))}
+    </div>
+  </div>
+</section>

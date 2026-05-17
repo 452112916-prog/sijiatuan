@@ -1,0 +1,60 @@
+---
+import FaqItem from "@src/components/FaqItem.astro";
+
+export interface Faq {
+  question: string;
+  answer: string;
+  open?: boolean;
+}
+
+export interface FaqSectionProps {
+  id?: string;
+  items?: Faq[];
+}
+
+const {
+  id = "faq",
+  items = [
+    {
+      question: "你们是做拼团还是私家团？",
+      answer:
+        "我们主做私家团和小团地接，通常是一团一车一司导，不和陌生游客拼在一起。行程可以按你的天数、预算、体力和兴趣调整。",
+      open: true,
+    },
+    {
+      question: "外地游客到贵州，从哪里开始最方便？",
+      answer:
+        "大多数客人从贵阳机场或贵阳北站开始。也可以从安顺、铜仁、凯里等地接站，我们会根据你的抵离城市重新排路线。",
+    },
+    {
+      question: "费用包含哪些内容？",
+      answer:
+        "不同路线略有差异，通常可包含专车、司导、酒店建议、景区门票代订和行程管家服务。正式报价会写清楚包含与不包含项目。",
+    },
+    {
+      question: "适合带老人和小孩吗？",
+      answer:
+        "适合。我们会减少赶路和高强度步行，优先安排舒适住宿、合理用餐和可休息的游览节奏。",
+    },
+    {
+      question: "可以只订包车司导吗？",
+      answer:
+        "可以。你也可以只需要贵州当地包车、司导、接送站或单日地接服务，具体按车型、天数和路线报价。",
+    },
+  ],
+} = Astro.props as FaqSectionProps;
+---
+
+<section id={id} class="relative py-16 md:py-20 overflow-hidden">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="space-y-4">
+      {items.map((item) => (
+        <FaqItem
+          question={item.question}
+          answer={item.answer}
+          open={item.open}
+        />
+      ))}
+    </div>
+  </div>
+</section>

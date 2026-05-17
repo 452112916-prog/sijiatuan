@@ -1,0 +1,38 @@
+﻿---
+export interface HeadingSectionProps {
+  title: string;
+  description?: string;
+  backgroundImage: string;
+}
+
+/* =========================
+   Sample Data
+========================= */
+const {
+  title = "Page Heading",
+  description,
+  backgroundImage = "/img/optimized/bg-hero.webp",
+} = Astro.props as HeadingSectionProps;
+---
+
+<!-- Heading Section -->
+<div
+  class="relative pt-32 pb-20 overflow-hidden"
+  style={`background-image:url('${backgroundImage}');background-size:cover;background-position:center;`}
+>
+  <!-- overlay -->
+  <div class="absolute inset-0 bg-linear-to-t from-white/95 via-white/55 to-stone-950/20"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
+    <h1 class="text-3xl md:text-4xl font-semibold text-stone-950">
+      {title}
+    </h1>
+
+    {description && (
+      <p class="mt-4 text-stone-700 max-w-2xl mx-auto">
+        {description}
+      </p>
+    )}
+  </div>
+</div>
+

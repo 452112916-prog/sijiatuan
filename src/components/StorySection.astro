@@ -1,0 +1,52 @@
+---
+export interface StoryStat {
+  value: string;
+  label: string;
+}
+
+export interface StorySectionProps {
+  id?: string;
+  title: string;
+  paragraphs: string[];
+  stats: StoryStat[];
+}
+
+const {
+  id = "story",
+  title = "我们的服务方式",
+  paragraphs = [
+    "贵州的风景很分散，山路、景区换乘、住宿位置和季节天气都会影响体验。我们做的事，就是把这些落地细节提前处理好。",
+    "每个私家团都会先了解客人的抵离时间、同行人、预算、体力和兴趣，再安排更顺路的动线，而不是照搬固定模板。",
+    "你可以把我们当成在贵州当地的旅行管家：负责接待、协调、提醒和调整，让外地游客来贵州少踩坑、多看风景。",
+  ],
+  stats = [
+    { value: "8+", label: "贵州核心目的地" },
+    { value: "900+", label: "累计服务游客" },
+    { value: "120+", label: "定制私家路线" },
+    { value: "24h", label: "在地响应支持" },
+  ],
+} = Astro.props as StorySectionProps;
+---
+
+<section id={id} class="relative py-16 md:py-20 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold text-stone-950">{title}</h2>
+
+        {paragraphs.map((text) => (
+          <p class="mt-4 text-stone-600 leading-relaxed">{text}</p>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        {stats.map((stat) => (
+          <div class="rounded-2xl bg-white border border-orange-100 p-6 shadow-sm shadow-orange-950/5">
+            <div class="text-3xl font-semibold text-stone-950">{stat.value}</div>
+            <div class="mt-1 text-stone-600">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

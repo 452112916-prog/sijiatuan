@@ -1,0 +1,106 @@
+---
+import Header from "@src/components/Header.astro";
+import Footer from "@src/components/Footer.astro";
+import BackToTop from "@src/components/BackToTop.astro";
+
+import "glightbox/dist/css/glightbox.min.css";
+import "@src/styles/style.css";
+
+const navItems = [
+  { label: "首页", href: "/" },
+  { label: "关于我们", href: "/about" },
+  { label: "私家团路线", href: "/tours" },
+  { label: "常见问题", href: "/faqs" },
+  { label: "游客评价", href: "/reviews" },
+  { label: "贵州攻略", href: "/blogs" },
+];
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title = "贵州多彩美途旅行社 - 贵州私家团定制",
+  description = "贵州多彩美途旅行社专注外地游客来贵州旅行的地接接待、私家团定制、亲子游、摄影游和商务小团服务。",
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="贵州多彩美途旅行社" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={Astro.url?.href || "https://guizhou-private-tours.example.com"} />
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+  </head>
+
+  <body class="font-sans bg-orange-50 text-stone-900">
+    <Header
+      logo={{
+        src: "/img/logo.png",
+        alt: "贵州多彩美途旅行社",
+        href: "/",
+      }}
+      navItems={navItems}
+      cta={{
+        label: "咨询定制",
+        href: "/booking",
+      }}
+    />
+    <main>
+      <slot />
+    </main>
+    <Footer
+      backgroundImage="/img/optimized/bg-hero.webp"
+      about={{
+        title: "关于贵州多彩美途",
+        description:
+          "我们专注外地游客来贵州的落地接待与私家团定制，从贵阳接送、酒店建议、车辆司导到每日动线，都按你的时间、体力和兴趣重新安排。",
+      }}
+      navigation={[
+        { label: "私家团路线", href: "/tours" },
+        { label: "预订咨询", href: "/booking" },
+        { label: "联系我们", href: "/contact" },
+        { label: "常见问题", href: "/faqs" },
+      ]}
+      destinations={[
+        "黄果树瀑布",
+        "荔波小七孔",
+        "西江千户苗寨",
+        "梵净山",
+        "镇远古城",
+      ]}
+      copyright="© 2026 贵州多彩美途旅行社. All rights reserved."
+    />
+    <BackToTop />
+
+    <script>
+      import Alpine from "alpinejs";
+      declare global {
+        interface Window {
+          Alpine: typeof Alpine;
+        }
+      }
+      window.Alpine = Alpine;
+      Alpine.start();
+    </script>
+
+    <script>
+      import GLightbox from "glightbox";
+
+      const hasLightbox = document.querySelector(".glightbox");
+      if (hasLightbox) {
+        GLightbox({
+          selector: ".glightbox",
+          touchNavigation: true,
+          loop: true,
+        });
+      }
+    </script>
+  </body>
+</html>

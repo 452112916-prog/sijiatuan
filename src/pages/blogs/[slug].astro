@@ -1,0 +1,94 @@
+---
+import MainLayout from "@src/layouts/MainLayout.astro";
+import AuthorCard from "@src/components/AuthorCard.astro";
+import BlogCard from "@src/components/BlogCard.astro";
+import { getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import ShareLink from "@src/components/ShareLink.astro";
+import { Icon } from "astro-icon/components";
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.mdx$/, "") },
+    props: { post },
+  }));
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const data = post.data;
+const postDate = typeof data.date === "string" ? new Date(data.date) : data.date;
+const formattedDate = new Intl.DateTimeFormat("zh-CN", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+}).format(postDate);
+
+const allPosts = await getCollection("blog");
+const related = allPosts
+  .filter((p) => p.data.category === data.category && p.id !== post.id)
+  .slice(0, 3);
+---
+
+<MainLayout title={`${data.title} - 贵州旅行攻略`}>
+  <section
+    class="relative pt-32 md:min-h-[55vh] flex items-end overflow-hidden"
+    style={{
+      backgroundImage: `url(${data.cover})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}
+  >
+    <div class="absolute inset-0 bg-linear-to-b from-white/40 via-white/80 to-orange-50"></div>
+    <div class="relative z-10 w-full">
+      <div class="max-w-6xl mx-auto px-4 pb-16">
+        <span class="inline-block rounded-full bg-white/80 px-4 py-1 text-xs text-black mb-4">
+          {data.category}
+        </span>
+
+        <h1 class="text-2xl md:text-3xl lg:text-4xl font-semibold text-stone-950 max-w-4xl">
+          {data.title}
+        </h1>
+
+        <div class="mt-4 flex flex-wrap items-center gap-4 text-stone-600 text-sm">
+          <span class="flex items-center gap-2">
+            <Icon name="bi:calendar-event" />
+            <time datetime={postDate.toISOString()}>{formattedDate}</time>
+          </span>
+
+          <span class="flex items-center gap-2">
+            <Icon name="bi:clock" /> {data.readTime} 分钟阅读
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative pb-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <article class="post-content rounded-2xl bg-white border border-orange-100 p-6 md:p-8 shadow-sm shadow-orange-950/5">
+        <Content />
+      </article>
+
+      <div class="mt-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <AuthorCard author={data.author} />
+        <ShareLink slug={post.id.replace(/\.mdx$/, "")} title={data.title} />
+      </div>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="relative py-16 md:py-20 bg-orange-50 overflow-hidden mb-6">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-semibold text-stone-950 mb-10">
+          相关阅读
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {related.map((r) => <BlogCard post={r} />)}
+        </div>
+      </div>
+    </section>
+  )}
+</MainLayout>

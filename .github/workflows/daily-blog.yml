@@ -1,0 +1,41 @@
+name: Daily Guizhou Blog
+
+on:
+  schedule:
+    # Beijing 07:00 is UTC 23:00 on the previous day.
+    - cron: "0 23 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate daily blog article
+        run: node scripts/generate-daily-blog.mjs
+
+      - name: Build site
+        run: npm run build
+        env:
+          ASTRO_TELEMETRY_DISABLED: "1"
+
+      - name: Commit generated article
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Add daily Guizhou travel guide"
+          file_pattern: src/content/blog/*.mdx

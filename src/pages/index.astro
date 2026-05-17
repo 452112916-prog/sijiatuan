@@ -1,0 +1,106 @@
+---
+import AboutSection from "@src/components/AboutSection.astro";
+import BlogSection from "@src/components/BlogSection.astro";
+import CtaSection from "@src/components/CtaSection.astro";
+import HeroSection from "@src/components/HeroSection.astro";
+import TourSection from "@src/components/TourSection.astro";
+import WhySection from "@src/components/WhySection.astro";
+import MainLayout from "@src/layouts/MainLayout.astro";
+---
+
+<MainLayout
+  title="贵州多彩美途旅行社 - 贵州私家团定制"
+  description="贵州多彩美途旅行社为外地游客提供贵州地接接待、私家团定制、亲子游、摄影游和小团包车服务。"
+>
+  <HeroSection
+    backgroundImage="/img/optimized/bg-hero.webp"
+    badgeText="贵州本地地接 · 私家团定制"
+    title="来贵州，走一趟真正舒服的私家旅行"
+    description="我们是贵州多彩美途旅行社，专注外地游客来贵州的落地接待。贵阳接送、专车司导、酒店建议、景区门票、亲子节奏、摄影机位和少数民族村寨体验，都可以按你的时间重新定制。"
+    avatars={[
+      { src: "/img/optimized/male1.webp", alt: "游客 1" },
+      { src: "/img/optimized/male2.webp", alt: "游客 2" },
+      { src: "/img/optimized/female1.webp", alt: "游客 3" },
+      { src: "/img/optimized/female2.webp", alt: "游客 4" },
+    ]}
+    reviewText="900+ 游客好评"
+    rating={5}
+    ctas={[
+      {
+        label: "查看私家团",
+        href: "#packages",
+        className: "bg-orange-500 hover:bg-orange-600 text-white",
+      },
+      {
+        label: "了解我们",
+        href: "#about",
+        className: "bg-amber-600 hover:bg-amber-700 text-white",
+      },
+    ]}
+  />
+
+  <WhySection title="为什么选择多彩美途？" />
+
+  <TourSection
+    title="贵州热门私家团路线"
+    description="从第一次来贵州的经典线路，到摄影深度、亲子轻松、商务接待，我们把每日车程、游玩强度和住宿位置都提前想好。"
+  />
+
+  <AboutSection
+    title="贵州本地团队，为你的行程做细节"
+    description={[
+      "多彩美途长期服务来黔游客，熟悉贵阳、安顺、黔南、黔东南、铜仁等热门目的地的季节、交通和景区节奏。",
+      "我们不做流水线拼团，更适合家庭、朋友、情侣、摄影爱好者和企业小团。行程可慢可快，酒店可舒适可精品，餐食可地道也可清淡。",
+    ]}
+    features={[
+      { icon: "bi:geo-alt", label: "贵州本地地接" },
+      { icon: "bi:car-front", label: "专车司导服务" },
+    ]}
+    stats={[
+      { value: "8+", label: "核心目的地" },
+      { value: "900+", label: "服务游客" },
+      { value: "120+", label: "定制路线" },
+      { value: "1团1策", label: "私家安排" },
+    ]}
+  />
+
+  <CtaSection
+    title="准备来贵州？先把想法发给我们"
+    description="告诉我们出行人数、天数、抵达城市和想看的风景，我们会给你一版更顺路、更省心的贵州私家团方案。"
+    backgroundImage="/img/generated/xijiang-miao-village.webp"
+    buttons={[
+      { label: "提交需求", href: "booking", variant: "primary" },
+      { label: "联系我们", href: "contact", variant: "outline" },
+    ]}
+  />
+
+  <BlogSection
+    id="blogs"
+    title="贵州旅行灵感"
+    description="看瀑布、进苗寨、走山水、吃酸汤，这里整理一些适合外地游客的贵州旅行建议。"
+    maxPosts={3}
+  />
+</MainLayout>
+
+<script>
+  (function initSmoothScroll(offset: number = 80): void {
+    document
+      .querySelectorAll<HTMLAnchorElement>('a[href^="#"]')
+      .forEach((anchor) => {
+        anchor.addEventListener("click", (e: MouseEvent) => {
+          const href = anchor.getAttribute("href");
+          if (!href || href === "#" || href.length < 2) return;
+
+          const target = document.querySelector<HTMLElement>(href);
+          if (!target) return;
+
+          e.preventDefault();
+          const top =
+            target.getBoundingClientRect().top + window.pageYOffset - offset;
+
+          window.scrollTo({ top, behavior: "smooth" });
+          history.pushState(null, "", href);
+        });
+      });
+  })(80);
+</script>

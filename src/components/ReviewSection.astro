@@ -1,0 +1,80 @@
+---
+import ReviewCard from "@src/components/ReviewCard.astro";
+
+export interface Review {
+  name: string;
+  country: string;
+  avatar: string;
+  rating: number;
+  message: string;
+}
+
+export interface ReviewSectionProps {
+  id?: string;
+  reviews?: Review[];
+}
+
+const {
+  id = "reviews",
+  reviews = [
+    {
+      name: "王女士",
+      country: "上海",
+      avatar: "/img/optimized/female1.webp",
+      rating: 5,
+      message:
+        "带父母来贵州，最满意的是节奏不赶。黄果树和小七孔都安排得很顺，司机师傅也很细心。",
+    },
+    {
+      name: "陈先生",
+      country: "广州",
+      avatar: "/img/optimized/male1.webp",
+      rating: 5,
+      message:
+        "第一次来贵州，本来路线很乱，客服帮我们把贵阳、荔波、西江串起来，省了很多研究时间。",
+    },
+    {
+      name: "Lily",
+      country: "北京",
+      avatar: "/img/optimized/female2.webp",
+      rating: 4.8,
+      message:
+        "苗寨住宿位置推荐得很好，晚上看夜景很方便，第二天清晨拍照人也少。",
+    },
+    {
+      name: "周先生",
+      country: "杭州",
+      avatar: "/img/optimized/male2.webp",
+      rating: 5,
+      message:
+        "私家团比拼团舒服太多，孩子累了就调整节奏，餐厅也按我们的口味推荐。",
+    },
+    {
+      name: "林女士",
+      country: "深圳",
+      avatar: "/img/optimized/female3.webp",
+      rating: 4.9,
+      message:
+        "摄影路线安排得很懂，西江夜景和小七孔水色都拍到了满意的照片。",
+    },
+    {
+      name: "赵先生",
+      country: "成都",
+      avatar: "/img/optimized/male3.webp",
+      rating: 5,
+      message:
+        "商务接待临时加了一天黄果树，响应很快，车辆和时间都衔接得不错。",
+    },
+  ],
+} = Astro.props as ReviewSectionProps;
+---
+
+<section id={id} class="relative py-16 md:py-20 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {reviews.map((review) => (
+        <ReviewCard {...review} />
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,29 @@
+---
+title: "网站维护说明"
+updated: "2026-05-15"
+---
+
+这个站点已经改为贵州多彩美途旅行社的私家团网站，基于 Astro 构建。
+
+## 常用命令
+
+```bash
+npm install
+npm run dev
+npm run build
+```
+
+`npm run dev` 用于本地预览，`npm run build` 会把静态站点生成到 `dist/` 目录。
+
+## 内容位置
+
+- 首页和主要页面：`src/pages/`
+- 通用组件：`src/components/`
+- 私家团路线：`src/content/tours/`
+- 旅行攻略：`src/content/blog/`
+- 隐私政策、服务条款等页面内容：`src/content/pages/`
+- 全局样式：`src/styles/style.css`
+
+## 修改建议
+
+新增路线时，可以复制 `src/content/tours/` 里的任意 `.mdx` 文件，修改标题、价格、图片和正文。新增攻略时，可以复制 `src/content/blog/` 里的文章文件。

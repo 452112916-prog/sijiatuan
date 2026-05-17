@@ -1,0 +1,25 @@
+---
+export interface LogoProps {
+  href?: string;
+  src: string;
+  alt?: string;
+  className?: string;
+}
+
+const {
+  href = "/",
+  src = "/img/logo.png",
+  alt = "贵州多彩美途旅行社",
+  className = "",
+} = Astro.props as LogoProps;
+---
+
+<a href={href} aria-label={alt} class={`inline-flex items-center gap-2 text-stone-900 ${className}`}>
+  <span class="flex size-11 items-center justify-center overflow-hidden rounded-xl bg-white shadow-lg shadow-orange-950/20">
+    <img src={src} alt="" class="h-full w-full object-cover" loading="eager" />
+  </span>
+  <span class="leading-tight">
+    <span class="block text-sm font-semibold">多彩美途</span>
+    <span class="block text-[11px] text-stone-500">贵州私家团定制</span>
+  </span>
+</a>

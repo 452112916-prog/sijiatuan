@@ -1,0 +1,57 @@
+---
+export interface HeroAboutProps {
+  id?: string;
+  badge?: string;
+  title?: string;
+  description?: string;
+  backgroundImage?: string;
+  minHeight?: string;
+  className?: string;
+}
+
+const {
+  id = "heroabout",
+  badge = "贵州本地地接团队",
+  title = "把贵州旅行安排得更顺、更暖、更像你想要的样子",
+  description = "贵州多彩美途旅行社专注服务外地游客来黔旅行，提供私家团定制、包车司导、接送站、酒店建议和全程落地支持。",
+  backgroundImage = "/img/generated/xijiang-miao-village.webp",
+  minHeight = "78vh",
+  className = "",
+} = Astro.props as HeroAboutProps;
+---
+
+<section
+  id={id}
+  class={`relative overflow-hidden pt-24 pb-16 flex items-center mb-6 ${className}`}
+  style={`
+    background-image: url('${backgroundImage}');
+    background-size: cover;
+    background-position: center;
+    min-height: ${minHeight};
+  `}
+>
+  <div class="absolute inset-0 bg-linear-to-b from-white/80 via-white/40 to-orange-50/95"></div>
+
+  <div class="pointer-events-none absolute inset-0 opacity-40">
+    <div class="absolute -top-24 left-1/4 h-[140%] w-40 rotate-12 bg-linear-to-b from-orange-200/20 via-orange-200/0 to-transparent blur-2xl"></div>
+    <div class="absolute -top-24 left-2/3 h-[140%] w-56 -rotate-6 bg-linear-to-b from-amber-200/15 via-amber-200/0 to-transparent blur-2xl"></div>
+  </div>
+
+  <div class="relative z-10 w-full">
+    <div class="max-w-6xl mx-auto px-4 py-20">
+      <div class="max-w-3xl">
+        {badge && (
+          <span class="inline-flex items-center gap-2 rounded-full border border-orange-100 bg-white/85 px-6 py-2 text-sm text-stone-900">
+            {badge}
+          </span>
+        )}
+        <h1 class="mt-5 text-4xl sm:text-5xl font-semibold tracking-tight text-stone-950">
+          {title}
+        </h1>
+        <p class="mt-5 text-lg text-stone-700 leading-relaxed">
+          {description}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

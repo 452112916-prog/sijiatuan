@@ -1,0 +1,54 @@
+---
+import Button from "@src/components/Button.astro";
+
+export interface CtaButton {
+  label: string;
+  href?: string;
+  variant?: "primary" | "outline" | "success" | "white";
+  className?: string;
+}
+
+export interface CtaSectionProps {
+  title: string;
+  description: string;
+  backgroundImage: string;
+  buttons: CtaButton[];
+}
+
+const {
+  title = "准备来贵州？先把想法发给我们",
+  description = "告诉我们出行人数、天数、抵达城市和想看的风景，我们会给你一版更顺路、更省心的贵州私家团方案。",
+  backgroundImage = "/img/generated/xijiang-miao-village.webp",
+  buttons = [
+    { label: "提交需求", href: "booking", variant: "primary" },
+    { label: "联系我们", href: "contact", variant: "outline" },
+  ],
+} = Astro.props as CtaSectionProps;
+---
+
+<section
+  class="relative py-16 md:py-20 overflow-hidden"
+  style={`background-image: url('${backgroundImage}');
+         background-size: cover;
+         background-position: center;
+         background-attachment: fixed;`}
+>
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="rounded-3xl border border-orange-100 bg-white/90 p-10 text-center shadow-sm shadow-orange-950/10 backdrop-blur-md">
+      <h2 class="text-3xl md:text-4xl font-semibold text-stone-950">{title}</h2>
+
+      <p class="mt-4 text-stone-600 max-w-2xl mx-auto">{description}</p>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        {buttons.map((btn) => (
+          <Button
+            href={btn.href}
+            label={btn.label}
+            variant={btn.variant}
+            className="max-sm:w-full"
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

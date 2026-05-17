@@ -1,0 +1,70 @@
+---
+export interface FooterLink {
+  label: string;
+  href?: string;
+}
+
+export interface FooterProps {
+  backgroundImage: string;
+  about: {
+    title: string;
+    description: string;
+  };
+  navigation: FooterLink[];
+  destinations: string[];
+  copyright: string;
+}
+
+const { backgroundImage, about, navigation, destinations, copyright } =
+  Astro.props as FooterProps;
+---
+
+<footer class="relative mb-4 overflow-hidden">
+  <div class="relative mx-auto max-w-6xl px-4">
+    <div
+      class="relative overflow-hidden rounded-3xl border border-orange-100 bg-white p-10 text-stone-900 shadow-sm shadow-orange-950/5"
+      style={`background-image:url('${backgroundImage}'); background-size:cover; background-position:center;`}
+    >
+      <div class="absolute inset-0 bg-white/90"></div>
+
+      <div class="relative grid grid-cols-1 gap-10 md:grid-cols-4">
+        <div class="md:col-span-2 md:pe-12">
+          <h3 class="mb-4 text-lg font-semibold">{about.title}</h3>
+          <p class="leading-relaxed text-stone-600">{about.description}</p>
+        </div>
+
+        <div>
+          <h3 class="mb-4 text-lg font-semibold">网站导航</h3>
+          <ul class="space-y-2 text-stone-600">
+            {navigation.map((item) => (
+              <li>
+                {item.href ? (
+                  <a href={item.href} class="transition hover:text-orange-600">
+                    {item.label}
+                  </a>
+                ) : (
+                  <span>{item.label}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="mb-4 text-lg font-semibold">热门目的地</h3>
+          <ul class="space-y-2 text-stone-600">
+            {destinations.map((place) => (
+              <li>{place}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="relative mt-8 w-full border-t border-orange-100 py-4">
+        <div class="mx-auto max-w-6xl px-4 text-center text-sm text-stone-500">
+          <p>{copyright}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
