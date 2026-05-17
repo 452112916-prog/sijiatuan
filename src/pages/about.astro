@@ -8,11 +8,17 @@ const reviewImages = [
   "/img/reviews-watermark/fankui4.jpg",
 ];
 
+const pennantImages = [
+  "/img/pennants/pennant1.jpg",
+  "/img/pennants/pennant2.jpg",
+  "/img/pennants/pennant3.jpg",
+];
+
 const strengths = [
-  "一车一导，一家一团，全程不拼团不混团",
-  "行前深度沟通，按人数、体力、预算和兴趣重排路线",
-  "零购物、零隐形消费、费用包含项提前说明",
-  "专属导游、旅行管家、售后专员三维服务",
+  "一家一团、独立用车、一车一导，全程不拼团不混团",
+  "零购物、零隐形消费、零强制自费，费用包含项提前说明",
+  "专属导游 + 旅行管家 + 售后专员，行前行中行后都有人负责",
+  "行程可慢可快，酒店可舒适可精品，餐食可地道也可清淡",
   "亲子家庭、银发长辈、摄影爱好者和企业团建都可定制",
   "贵州本地团队，熟悉贵阳、安顺、黔南、黔东南、铜仁等线路节奏",
 ];
@@ -31,7 +37,7 @@ const strengths = [
           贵州多彩美途旅行社有限公司
         </h1>
         <p class="mt-5 text-lg leading-relaxed text-stone-700">
-          我们成立于2021年，扎根贵阳，专注高端定制小团、私家团和企业团建接待。多彩美途不只做线路安排，更希望成为一张鲜活的贵州名片，用细致服务把贵州山水、人文和民族风情真诚传递给每一位远道而来的客人。
+          多彩美途成立于2021年，扎根贵阳，专注高端定制小团、私家团和企业团建接待。我们不只做旅游服务商，更希望成为一张鲜活的贵州名片，用用心的服务讲好贵州故事，把黔地山水与人文魅力传递给每一位远道而来的客人。
         </p>
         <div class="mt-7 flex flex-wrap gap-3">
           <a href="/booking" class="rounded-xl bg-orange-500 px-5 py-3 font-semibold text-white shadow-lg shadow-orange-950/10 transition hover:bg-orange-600">
@@ -48,7 +54,7 @@ const strengths = [
           ["20万+", "累计服务人次"],
           ["1万+", "2025定制家庭"],
           ["99.9%", "综合好评率"],
-          ["68%", "老客复购率"],
+          ["85%", "老客推荐率"],
         ].map(([value, label]) => (
           <div class="rounded-2xl border border-orange-100 bg-white/90 p-6 shadow-sm shadow-orange-950/5 backdrop-blur">
             <p class="text-3xl font-semibold text-stone-950">{value}</p>
@@ -63,9 +69,9 @@ const strengths = [
     <div class="mx-auto max-w-6xl px-4">
       <div class="max-w-3xl">
         <p class="text-sm font-semibold text-orange-600">我们的服务</p>
-        <h2 class="mt-3 text-3xl font-semibold text-stone-950">更适合家庭、朋友、情侣、摄影爱好者和企业小团</h2>
+        <h2 class="mt-3 text-3xl font-semibold text-stone-950">不走“大而全”，只走“专而精”</h2>
         <p class="mt-4 text-stone-600">
-          多彩美途坚持“一家一团、独立用车、一车一导”的服务模式。行程可慢可快，酒店可舒适可精品，餐食可地道也可清淡，真正按客人的时间、体力和兴趣来安排。
+          多彩美途聚焦高端定制小团和高端公司团建，在足够垂直的服务场景里，把路线、车辆、导游、酒店、餐食和应急细节做深做稳。
         </p>
       </div>
 
@@ -80,31 +86,118 @@ const strengths = [
   </section>
 
   <section class="bg-orange-50 py-16 md:py-20">
-    <div class="mx-auto max-w-6xl px-4">
-      <div class="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
-        <div>
-          <p class="text-sm font-semibold text-orange-600">写进服务里的保障</p>
-          <h2 class="mt-3 text-3xl font-semibold text-stone-950">透明、灵活、有人负责到底</h2>
-          <div class="mt-6 space-y-4 text-stone-700">
-            <p>行前由定制顾问深度沟通，确认抵离城市、景区偏好、酒店标准、同行成员和预算，再输出更顺路的贵州私家团方案。</p>
-            <p>行程中由专属导游和旅行管家跟进，遇到天气、人流、体力变化，可以及时调整当天安排。</p>
-            <p>报价、用车、住宿和包含项目提前说明，所有口头承诺尽量落实到明确方案中，让游客更安心。</p>
-          </div>
+    <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 lg:grid-cols-2 lg:items-center">
+      <div>
+        <p class="text-sm font-semibold text-orange-600">写进服务里的保障</p>
+        <h2 class="mt-3 text-3xl font-semibold text-stone-950">透明、灵活、有人负责到底</h2>
+        <div class="mt-6 space-y-4 text-stone-700">
+          <p>行前深度沟通，确认抵离城市、景区偏好、酒店标准、同行成员和预算，再输出更顺路的贵州私家团方案。</p>
+          <p>行程中由专属导游和旅行管家跟进，遇到天气、人流、体力变化，可以及时调整当天安排。</p>
+          <p>报价、用车、住宿和包含项目提前说明，所有口头承诺尽量落实到明确方案中，让游客更安心。</p>
         </div>
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <img src="/img/certificates/aaa-credit.jpg" alt="AAA级企业信用等级证书" class="rounded-2xl border border-orange-100 bg-white object-cover shadow-sm" loading="lazy" />
-          <img src="/img/certificates/aaa-service.jpg" alt="AAA级质量服务诚信单位证书" class="rounded-2xl border border-orange-100 bg-white object-cover shadow-sm" loading="lazy" />
-        </div>
+      </div>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <img src="/img/certificates/aaa-credit.jpg" alt="AAA级企业信用等级证书" class="rounded-2xl border border-orange-100 bg-white object-cover shadow-sm" loading="lazy" />
+        <img src="/img/certificates/aaa-service.jpg" alt="AAA级质量服务诚信单位证书" class="rounded-2xl border border-orange-100 bg-white object-cover shadow-sm" loading="lazy" />
       </div>
     </div>
   </section>
 
   <section class="bg-white py-16 md:py-20">
     <div class="mx-auto max-w-6xl px-4">
+      <p class="text-sm font-semibold text-orange-600">关键案例</p>
+      <h2 class="mt-3 text-3xl font-semibold text-stone-950">把复杂接待做稳，把细小需求照顾到位</h2>
+
+      <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <article class="rounded-2xl border border-orange-100 bg-orange-50 p-6">
+          <h3 class="text-xl font-semibold text-stone-950">800人大型团建的极限考验</h3>
+          <p class="mt-4 text-stone-700">
+            2025年底，多彩美途接到一笔800人的大型企业团建订单。团队复盘过往大型项目经验，重新梳理车辆、导游、餐饮、住宿、分组和应急流程，最终顺利完成接待并获得客户正向反馈。
+          </p>
+        </article>
+
+        <article class="rounded-2xl border border-orange-100 bg-orange-50 p-6">
+          <h3 class="text-xl font-semibold text-stone-950">新西兰外籍游客的口碑推荐</h3>
+          <p class="mt-4 text-stone-700">
+            一批来自新西兰的外籍游客通过口碑推荐找到多彩美途。此前他们在国内多地旅行体验并不理想，而在多彩美途细致周到的落地服务中，重新感受到贵州旅行的舒适和安心。
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-orange-50 py-16 md:py-20">
+    <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+      <div>
+        <p class="text-sm font-semibold text-orange-600">品牌故事</p>
+        <h2 class="mt-3 text-3xl font-semibold text-stone-950">一碗云端炸酱面，找到人间烟火</h2>
+        <p class="mt-5 text-stone-700">
+          周先生说想找一个没人的地方发一天呆，不想听历史讲解。导游阿蕾带他走进雷公山腹地的传统村落，在火塘边安静陪伴。后来周先生接到家里电话，提起十年没吃到母亲做的炸酱面。阿蕾没有生硬安慰，而是走进苗寨厨房，用当地豆豉、肉末和山里嫩胡瓜，端出一碗带着苗家酸菜的炸酱面。
+        </p>
+        <p class="mt-4 text-stone-700">
+          行程结束时，周先生写下：“我以为我是来看贵州的山水，其实我是来找回人间烟火的。”这正是多彩美途理解的定制旅行：不只安排景点，也照顾人心。
+        </p>
+      </div>
+      <div class="rounded-2xl border border-orange-100 bg-white p-6 shadow-sm shadow-orange-950/5">
+        <h3 class="text-xl font-semibold text-stone-950">服务细节图谱</h3>
+        <div class="mt-5 grid gap-4 sm:grid-cols-2">
+          <div>
+            <p class="font-semibold text-stone-900">带娃家庭</p>
+            <ul class="mt-2 space-y-2 text-sm text-stone-600">
+              <li>儿童安全座椅、湿巾、小玩具、绘本</li>
+              <li>轻便婴儿车、婴儿床、床围、温奶器</li>
+              <li>提前确认景区母婴室和休息点</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold text-stone-900">银发长辈</p>
+            <ul class="mt-2 space-y-2 text-sm text-stone-600">
+              <li>便携折叠凳、暖水壶、常备药箱</li>
+              <li>可随车携带便携轮椅</li>
+              <li>提前确认无障碍通道和少走路动线</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 md:py-20">
+    <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 lg:grid-cols-2">
+      <div>
+        <p class="text-sm font-semibold text-orange-600">团队训练</p>
+        <h2 class="mt-3 text-3xl font-semibold text-stone-950">培训、复训和客户评价挂钩</h2>
+        <div class="mt-6 space-y-4 text-stone-700">
+          <p>新员工从企业文化、服务SOP、目的地资源、导游资质和方案呈现开始训练，确保定制方案不是简单拼景点。</p>
+          <p>淡季会集中复训新景点知识、收费政策和应急预案；内部质检和神秘客户暗访会检查真实服务流程。</p>
+          <p>导游和定制师绩效与平台点评、事后回访、复购率直接挂钩，形成从接待到回访的闭环管理。</p>
+        </div>
+      </div>
+      <div class="rounded-2xl border border-orange-100 bg-orange-50 p-6">
+        <h3 class="text-xl font-semibold text-stone-950">团队实力</h3>
+        <div class="mt-5 grid grid-cols-2 gap-4">
+          {[
+            ["约20人", "正式社保员工"],
+            ["300+人", "合作导游/导师"],
+            ["49名", "双证导游"],
+            ["38名", "持证研学导师"],
+          ].map(([value, label]) => (
+            <div class="rounded-xl bg-white p-4">
+              <p class="text-2xl font-semibold text-stone-950">{value}</p>
+              <p class="mt-1 text-sm text-stone-500">{label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-orange-50 py-16 md:py-20">
+    <div class="mx-auto max-w-6xl px-4">
       <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <p class="text-sm font-semibold text-orange-600">真实反馈</p>
-          <h2 class="mt-3 text-3xl font-semibold text-stone-950">游客评价与服务口碑</h2>
+          <h2 class="mt-3 text-3xl font-semibold text-stone-950">游客评价、服务口碑与客户锦旗</h2>
         </div>
         <a href="/booking" class="text-sm font-semibold text-orange-600 hover:underline">咨询定制方案</a>
       </div>
@@ -112,6 +205,13 @@ const strengths = [
       <div class="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {reviewImages.map((src) => (
           <img src={src} alt="贵州多彩美途游客评价截图" class="rounded-2xl border border-orange-100 bg-white shadow-sm" loading="lazy" />
+        ))}
+      </div>
+
+      <h3 class="mt-14 text-2xl font-semibold text-stone-950">客户锦旗</h3>
+      <div class="mt-6 grid grid-cols-1 gap-5 md:grid-cols-3">
+        {pennantImages.map((src) => (
+          <img src={src} alt="贵州多彩美途客户锦旗照片" class="rounded-2xl border border-orange-100 bg-white shadow-sm" loading="lazy" />
         ))}
       </div>
     </div>
