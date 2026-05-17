@@ -24,6 +24,10 @@ const {
   title = "贵州多彩美途旅行社 - 贵州私家团定制",
   description = "贵州多彩美途旅行社专注外地游客来贵州旅行的地接接待、私家团定制、亲子游、摄影游和商务小团服务。",
 } = Astro.props;
+
+const canonicalUrl = Astro.url?.href || "https://sjt.gz-axy.com/";
+const siteName = "贵州多彩美途旅行社";
+const ogImage = new URL("/img/generated/xijiang-miao-village.webp", canonicalUrl).href;
 ---
 
 <!DOCTYPE html>
@@ -35,8 +39,36 @@ const {
     <meta name="description" content={description} />
     <meta name="author" content="贵州多彩美途旅行社" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href={Astro.url?.href || "https://guizhou-private-tours.example.com"} />
+    <meta name="keywords" content="贵州私家团,贵州定制游,贵州包车司导,贵州地接,贵阳旅行社,黄果树瀑布私家团,荔波小七孔定制游,西江千户苗寨私家团" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "TravelAgency",
+      name: "贵州多彩美途旅行社有限公司",
+      url: "https://sjt.gz-axy.com/",
+      telephone: "18984577004",
+      areaServed: "贵州",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "贵阳",
+        addressRegion: "贵州",
+        addressCountry: "CN",
+      },
+      description,
+      image: ogImage,
+      sameAs: [],
+    })} />
   </head>
 
   <body class="font-sans bg-orange-50 text-stone-900">
