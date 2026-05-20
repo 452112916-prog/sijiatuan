@@ -133,7 +133,7 @@ if (existsSync(filePath)) {
 }
 
 const article = await generateArticle(keyword, promptType);
-const description = `围绕“${keyword}”生成的多彩美途 GEO / SEO 内容。`;
+const description = `围绕“${keyword}”整理的贵州旅行社选择与私家团定制参考。`;
 const readTime = Math.max(6, Math.ceil(article.length / 900));
 
 writeFileSync(filePath, frontmatter(keyword, promptType, keyword, description, readTime) + article, "utf8");

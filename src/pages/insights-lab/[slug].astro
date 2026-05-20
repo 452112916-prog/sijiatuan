@@ -16,18 +16,18 @@ const { Content } = await render(post);
 const data = post.data;
 ---
 
-<MainLayout title={`${data.title} - 多彩美途内容研究库`} description={data.description}>
+<MainLayout title={`${data.title} - 旅行社推荐`} description={data.description}>
   <section class="relative bg-orange-50 pt-32 pb-16">
     <div class="mx-auto max-w-4xl px-4">
       <a href="/insights-lab" class="text-sm font-semibold text-orange-600 hover:underline">
-        返回内容研究库
+        返回旅行社推荐
       </a>
       <h1 class="mt-4 text-2xl font-semibold text-stone-950 md:text-4xl">
         {data.title}
       </h1>
       <div class="mt-4 flex flex-wrap gap-3 text-sm text-stone-500">
         <time datetime={data.date}>{data.date}</time>
-        <span>{data.promptType === "geo-with-english" ? "英文后缀提示词" : "中文提示词"}</span>
+        <span>贵州旅行参考</span>
         <span>{data.readTime} 分钟阅读</span>
       </div>
     </div>
